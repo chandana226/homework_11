@@ -20,17 +20,21 @@ jobs:
         
     - name: Install dependencies
       run: |
+        cd mlops
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        
-    - name: Train model
+
+      - name: Train model
       run: |
+        cd mlops
         python train_model.py
-        
-    - name: Test model loading
-      run: |
-        python -c "import joblib; model = joblib.load('models/iris_model.pkl'); print('Model loaded successfully!')"
-        
-    - name: Test FastAPI app
-      run: |
-        python -c "from app import app; print('FastAPI app imported successfully!')" 
+
+      - name: Test model loading
+     run: |
+       cd mlops
+       python -c "import joblib; model = joblib.load('models/iris_model.pkl'); print('Model loaded successfully!')"
+
+        - name: Test FastAPI app
+        run: |
+          cd mlops
+          python -c "from app import app; print('FastAPI app imported successfully!')"
