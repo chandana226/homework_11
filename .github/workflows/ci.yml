@@ -19,22 +19,22 @@ jobs:
         python-version: '3.9'
         
     - name: Install dependencies
+      working-directory: mlops
       run: |
-        cd mlops
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         
     - name: Train model
+      working-directory: mlops
       run: |
-        cd mlops
         python train_model.py
         
     - name: Test model loading
+      working-directory: mlops
       run: |
-        cd mlops
         python -c "import joblib; model = joblib.load('models/iris_model.pkl'); print('Model loaded successfully!')"
         
     - name: Test FastAPI app
+      working-directory: mlops
       run: |
-        cd mlops
         python -c "from app import app; print('FastAPI app imported successfully!')"
